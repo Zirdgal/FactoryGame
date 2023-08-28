@@ -15,8 +15,8 @@ const loadButton = document.getElementById("loadbutton");
 
 saveButton.onclick = function saveProgress() {
     document.cookie = "score=" + currentScore + ";";
-    document.cookie = "multi=" + scoreMultiplyer + ";";
-}
+    document.cookie = "multi=" + scoreMultiplier + ";";
+} 
 
 
 loadButton.onclick = function loadProgress() {
@@ -39,7 +39,7 @@ loadButton.onclick = function loadProgress() {
     document.getElementById("scorepersecond").innerHTML = loadedMultiplier;
 
     currentScore = loadedScore;
-    scoreMultiplyer = loadedMultiplier;
+    scoreMultiplier = loadedMultiplier;
 };
 
 
@@ -59,25 +59,25 @@ _____   ___  ___  ___ _____  ______ _   _ _   _ _____ _____ _____ _____ _   _
 
 
 let currentScore = 0;
-let scoreMultiplyer = 0;
+let scoreMultiplier = 0;
 
 const display = document.getElementsByClassName("display");
 const scorePerSecond = document.getElementById("scorepersecond");
 const upgrade1Button = document.getElementById("upgrade1");
 
 upgrade1Button.onclick = function upgrade1() {
-    scoreMultiplyer++;
+    scoreMultiplier++;
     upgrade1Button.innerHTML = "Upgraded."
     upgrade1Button.disabled = true;
 }
 
 setInterval(scorePerSecondLogic, 1000);
 function scorePerSecondLogic() {
-    scorePerSecond.innerHTML = scoreMultiplyer + " SPS"
+    scorePerSecond.innerHTML = scoreMultiplier + " SPS"
 }
 
 setInterval(formula, 1000);
 function formula() {
-    currentScore = currentScore + scoreMultiplyer;
+    currentScore = currentScore + scoreMultiplier;
     document.getElementById("displaytext").innerHTML = currentScore;
 }
