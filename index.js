@@ -10,39 +10,28 @@
 
 */ 
 
-const saveButton = document.getElementById("savebutton");
-const loadButton = document.getElementById("loadbutton");
+const deleteButton = document.getElementById("delbutton");
 
-saveButton.onclick = function saveProgress() {
-    document.cookie = "score=" + currentScore + ";";
-    document.cookie = "multi=" + scoreMultiplier + ";";
-} 
-
-
-loadButton.onclick = function loadProgress() {
-    const cookiesArray = document.cookie.split("; ");
-
-    let loadedScore = 0;
-    let loadedMultiplier = 0;
-
-    for (const cookie of cookiesArray) {
-        const cookieParts = cookie.split("=");
-
-        if (cookieParts[0] === "score") {
-            loadedScore = parseInt(cookieParts[1]);
-        } else if (cookieParts[0] === "multi") {
-            loadedMultiplier = parseInt(cookieParts[1]);
-        }
+window.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.savedScore) {
+        currentScore = parseInt(localStorage.savedScore);
+        document.getElementById("displaytext").innerHTML = currentScore;
     }
+    
+    if (localStorage.savedScoreMultiplier) {
+        scoreMultiplier = parseInt(localStorage.savedScoreMultiplier);
+        scorePerSecond.innerHTML = scoreMultiplier + " SPS";
+    }
+});
 
-    document.getElementById("displaytext").innerHTML = loadedScore;
-    document.getElementById("scorepersecond").innerHTML = loadedMultiplier;
-
-    currentScore = loadedScore;
-    scoreMultiplier = loadedMultiplier;
-};
-
-
+deleteButton.onclick = function deleteProgress() {
+    currentScore = 0;
+    scoreMultiplier = 0;
+    document.getElementById("displaytext").innerHTML = currentScore;
+    scorePerSecond.innerHTML = scoreMultiplier + " SPS";
+    localStorage.removeItem("savedScore");
+    localStorage.removeItem("savedScoreMultiplier");
+}
 
 
 /*
@@ -74,10 +63,12 @@ upgrade1Button.onclick = function upgrade1() {
 setInterval(scorePerSecondLogic, 1000);
 function scorePerSecondLogic() {
     scorePerSecond.innerHTML = scoreMultiplier + " SPS"
+    localStorage.savedScoreMultiplier = scoreMultiplier;
 }
 
 setInterval(formula, 1000);
 function formula() {
     currentScore = currentScore + scoreMultiplier;
     document.getElementById("displaytext").innerHTML = currentScore;
+    localStorage.savedScore = currentScore;
 }
