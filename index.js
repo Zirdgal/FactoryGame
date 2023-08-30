@@ -194,7 +194,7 @@ deleteButton.onclick = function deleteProgress() {
 
     localStorage.removeItem("savedAscendButtonStatus");
     localStorage.removeItem("savedAscendButtonCost");
-    localStorage.removeItem("avedAscendButtonMultiplier");
+    localStorage.removeItem("savedAscendButtonMultiplier");
 
     localStorage.removeItem("savedUpgrade1ButtonStatus");
     localStorage.removeItem("savedUpgrade1ButtonCost");
