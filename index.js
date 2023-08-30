@@ -22,15 +22,22 @@ window.addEventListener("DOMContentLoaded", function() {
         scoreMultiplier = parseInt(localStorage.savedScoreMultiplier);
         scorePerSecond.innerHTML = scoreMultiplier + " SPS";
     }
+
+    if (localStorage.savedUpgrade1ButtonStatus) {
+        upgrade1ButtonStatus = parseInt(localStorage.savedUpgrade1ButtonStatus);
+    }
 });
 
 deleteButton.onclick = function deleteProgress() {
     currentScore = 0;
     scoreMultiplier = 0;
+    upgrade1ButtonStatus = 0;
     document.getElementById("displaytext").innerHTML = currentScore;
     scorePerSecond.innerHTML = scoreMultiplier + " SPS";
+    upgrade1Button.innerHTML = "Upgrade1";
     localStorage.removeItem("savedScore");
     localStorage.removeItem("savedScoreMultiplier");
+    localStorage.removeItem("savedUpgrade1ButtonStatus");
 }
 
 
@@ -49,6 +56,7 @@ _____   ___  ___  ___ _____  ______ _   _ _   _ _____ _____ _____ _____ _   _
 
 let currentScore = 0;
 let scoreMultiplier = 0;
+let upgrade1ButtonStatus = 0;
 
 const display = document.getElementsByClassName("display");
 const scorePerSecond = document.getElementById("scorepersecond");
@@ -56,19 +64,33 @@ const upgrade1Button = document.getElementById("upgrade1");
 
 upgrade1Button.onclick = function upgrade1() {
     scoreMultiplier++;
+    upgrade1ButtonStatus = 1;
     upgrade1Button.innerHTML = "Upgraded."
     upgrade1Button.disabled = true;
 }
 
-setInterval(scorePerSecondLogic, 1000);
-function scorePerSecondLogic() {
-    scorePerSecond.innerHTML = scoreMultiplier + " SPS"
-    localStorage.savedScoreMultiplier = scoreMultiplier;
+setInterval(upgradeBlockingTimedEvents, 1);
+function upgradeBlockingTimedEvents() {
+    if (upgrade1ButtonStatus = 1) {
+        upgrade1Button.disabled = true;
+        upgrade1Button.innerHTML = "Upgraded."
+    } else {
+        upgrade1Button.disabled = false;
+        upgrade1Button.innerHTML = "Upgrade1"
+    }
 }
 
-setInterval(formula, 1000);
-function formula() {
+setInterval(timedEvents, 1000);
+function timedEvents() {
+    // Score Logic
     currentScore = currentScore + scoreMultiplier;
     document.getElementById("displaytext").innerHTML = currentScore;
+
+    // SPS Logic
+    scorePerSecond.innerHTML = scoreMultiplier + " SPS"
+
+    //localStorage
     localStorage.savedScore = currentScore;
+    localStorage.savedScoreMultiplier = scoreMultiplier;
+    localStorage.savedUpgrade1ButtonStatus = upgrade1ButtonStatus;
 }
