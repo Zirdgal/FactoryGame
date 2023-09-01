@@ -243,4 +243,3 @@ deleteButton.onclick = function deleteProgress() {
     localStorage.removeItem("savedUpgrade3ButtonCost");
     localStorage.removeItem("savedUpgrade3ButtonMultiplier");
 }
-
