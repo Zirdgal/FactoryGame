@@ -15,7 +15,7 @@ let currentScore = 0;
 let scoreMultiplier = 0;
 
 let ascendButtonStatus = 0;
-let ascendButtonCost = 1000;
+let ascendButtonCost = 10000;
 let ascendButtonMultiplier = 1;
 
 let upgrade1ButtonStatus = 0;
@@ -25,11 +25,16 @@ let upgrade2ButtonStatus = 0;
 let upgrade2ButtonCost = 35;
 let upgrade2ButtonMultiplier = 1;
 
+let upgrade3ButtonStatus = 0;
+let upgrade3ButtonCost = 69;
+let upgrade3ButtonMultiplier = 1;
+
 const display = document.getElementsByClassName("display");
 const scorePerSecond = document.getElementById("scorepersecond");
 const ascendButton = document.getElementById("ascendbutton");
 const upgrade1Button = document.getElementById("upgrade1");
 const upgrade2Button = document.getElementById("upgrade2");
+const upgrade3Button = document.getElementById("upgrade3");
 
 /*
                                       .___       ___.           __    __                  .__                .__        
@@ -40,22 +45,20 @@ const upgrade2Button = document.getElementById("upgrade2");
       |__|  /_____/            \/      \/    \/       \/                              \/             /_____/         \/   
 
 */
-ascendButton.onclick = function upgrade2() {
+ascendButton.onclick = function ascendUpgrade() {
     if (currentScore >= ascendButtonCost) {
         currentScore = currentScore - ascendButtonCost
         ascendButtonCost = ascendButtonCost * 20;
         ascendButtonMultiplier = ascendButtonMultiplier * 10;
         ascendButtonStatus++;
-        ascendButton.innerHTML = "Ascend SPS * 10 Cost: " + ascendButtonCost;
     }
 }
 upgrade1Button.onclick = function upgrade1() {
     if (currentScore >= upgrade1ButtonCost) {
         currentScore = currentScore - upgrade1ButtonCost;
-        upgrade1ButtonCost = upgrade1ButtonCost + 10;
+        upgrade1ButtonCost = upgrade1ButtonCost * 2 + 10;
         scoreMultiplier++;
         upgrade1ButtonStatus++;
-        upgrade1Button.innerHTML = "Increase SPS + 1 (Level " + upgrade1ButtonStatus + "/4) Cost:" + upgrade1ButtonCost;
     }
 }
 upgrade2Button.onclick = function upgrade2() {
@@ -63,7 +66,14 @@ upgrade2Button.onclick = function upgrade2() {
         currentScore = currentScore - upgrade2ButtonCost;
         upgrade2ButtonMultiplier = upgrade2ButtonMultiplier * 1.5;
         upgrade2ButtonStatus = 1;
-        upgrade2Button.innerHTML = "Increase SPS * 2 (Level MAX/1)";
+    }
+}
+upgrade3Button.onclick = function upgrade3() {
+    if (currentScore >= upgrade3ButtonCost) {
+        currentScore = currentScore - upgrade3ButtonCost;
+        upgrade3ButtonCost = upgrade3ButtonCost + 6900;
+        upgrade3ButtonMultiplier = scoreMultiplier * scoreMultiplier + upgrade3ButtonMultiplier;
+        upgrade3ButtonStatus++;
     }
 }
 
@@ -75,41 +85,51 @@ _/  |_|__| _____   ____   __| _/   _______  __ ____   _____/  |_  ______
  |__| |__|__|_|  /\___  >____ |   \___  >\_/  \___  >___|  /__| /____  >
                \/     \/     \/       \/          \/     \/          \/
 */ 
-setInterval(upgradeBlockingTimedEvents, 10);
+setInterval(upgradeBlockingTimedEvents, 1);
 function upgradeBlockingTimedEvents() {
     //ASCEND BUTTON
-    upgrade2Button.innerHTML = "Ascend SPS * 10 Cost: " + ascendButtonCost;
+    ascendButton.innerHTML = "Ascend SPS * 10 Cost: " + ascendButtonCost;
+
     //UPGRADE 1 BUTTON
-    if (upgrade1ButtonStatus === 4) {
+    if (upgrade1ButtonStatus === 15) {
         upgrade1Button.disabled = true;
-        upgrade1Button.innerHTML = "Increase SPS + 1 (Level MAX/4)"
+        upgrade1Button.innerHTML = "Increase SPS + 1 (Level MAX)"
     } else {
         upgrade1Button.disabled = false;
-        upgrade1Button.innerHTML = "Increase SPS + 1 (Level " + upgrade1ButtonStatus + "/4) Cost:" + upgrade1ButtonCost;
+        upgrade1Button.innerHTML = "Increase SPS + 1 (Level " + upgrade1ButtonStatus + "/15) Cost:" + upgrade1ButtonCost;
     }
-    if (upgrade1ButtonStatus >= 2) {
+    if (upgrade1ButtonStatus >= 3) {
         upgrade2Button.hidden = false;
     }
 
     //UPGRADE 2 BUTTON
     if(upgrade2ButtonStatus === 1) {
         upgrade2Button.disabled = true;
-        upgrade2Button.innerHTML = "Increase SPS * 2 (Level MAX/1)"
+        upgrade2Button.innerHTML = "Increase SPS * 1.5 (Level MAX)"
+        upgrade3Button.hidden = false;
     } else {
         upgrade2Button.disabled = false;
-        upgrade2Button.innerHTML = "Increase SPS * 2 (Level 0/1) Cost:35";
+        upgrade2Button.innerHTML = "Increase SPS * 1.5 (Level 0/1) Cost:35";
+    }
+
+    //UPGRADE 3 BUTTON
+    if(upgrade3ButtonStatus === 2) {
+        upgrade3Button.disabled = true;
+        upgrade3Button.innerHTML = "Increase SPS ^ 2 (Level MAX)"
+    } else {
+        upgrade3Button.disabled = false;
+        upgrade3Button.innerHTML = "Increase SPS ^ 2 (Level " + upgrade3ButtonStatus + "/2) Cost: " + upgrade3ButtonCost;
     }
 }
 
 setInterval(timedEvents, 1000);
 function timedEvents() {
     // Score Logic
-    currentScore = currentScore + (scoreMultiplier * upgrade2ButtonMultiplier);
+    currentScore = currentScore + (scoreMultiplier.toFixed(2) * upgrade2ButtonMultiplier.toFixed(2) * upgrade3ButtonMultiplier.toFixed(2) * ascendButtonMultiplier.toFixed(2));
     document.getElementById("displaytext").innerHTML = currentScore;
 
     // SPS Logic
-    scorePerSecond.innerHTML = (scoreMultiplier.toFixed(2) * upgrade2ButtonMultiplier.toFixed(2) * ascendButtonMultiplier.toFixed(2)) + " SPS"
-
+    scorePerSecond.innerHTML = (scoreMultiplier.toFixed(2) * upgrade2ButtonMultiplier.toFixed(2) * upgrade3ButtonMultiplier.toFixed(2) * ascendButtonMultiplier.toFixed(2))  + " SPS";
     //localStorage
     localStorage.savedScore = currentScore;
     localStorage.savedScoreMultiplier = scoreMultiplier;
@@ -124,6 +144,10 @@ function timedEvents() {
     localStorage.savedUpgrade2ButtonStatus = upgrade2ButtonStatus;
     localStorage.savedUpgrade2ButtonCost = upgrade2ButtonCost;
     localStorage.savedUpgrade2ButtonMultiplier = upgrade2ButtonMultiplier;
+        //upgrade 3 button
+    localStorage.savedUpgrade3ButtonStatus = upgrade3ButtonStatus;
+    localStorage.savedUpgrade3ButtonCost = upgrade3ButtonCost;
+    localStorage.savedUpgrade3ButtonMultiplier = upgrade3ButtonMultiplier;
 }
 
 /*
@@ -166,6 +190,13 @@ window.addEventListener("DOMContentLoaded", function() {
         upgrade2ButtonCost = parseInt(localStorage.savedUpgrade2ButtonCost); }
     if (localStorage.savedUpgrade2ButtonMultiplier) {
         upgrade2ButtonMultiplier = parseInt(localStorage.savedUpgrade2ButtonMultiplier); }
+
+    if (localStorage.savedUpgrade3ButtonStatus) {
+        upgrade3ButtonStatus = parseInt(localStorage.savedUpgrade3ButtonStatus); }
+    if (localStorage.savedUpgrade3ButtonCost) {
+        upgrade3ButtonCost = parseInt(localStorage.savedUpgrade3ButtonCost); }
+    if (localStorage.savedUpgrade3ButtonMultiplier) {
+        upgrade3ButtonMultiplier = parseInt(localStorage.savedUpgrade3ButtonMultiplier); }
 });
 
 deleteButton.onclick = function deleteProgress() {
@@ -182,12 +213,17 @@ deleteButton.onclick = function deleteProgress() {
     upgrade2ButtonStatus = 0;
     upgrade2ButtonCost = 35;
     upgrade2ButtonMultiplier = 1;
+    
+    upgrade3ButtonStatus = 0;
+    upgrade3ButtonCost = 69;
+    upgrade3ButtonMultiplier = 1;
 
     document.getElementById("displaytext").innerHTML = currentScore;
     scorePerSecond.innerHTML = scoreMultiplier + " SPS";
     ascendButton.innerHTML = "Ascend SPS * 10 Cost: " + ascendButtonCost;
-    upgrade1Button.innerHTML = "Increase SPS + 1 (Level " + upgrade1ButtonStatus + "/4) Cost:" + upgrade1ButtonCost;
+    upgrade1Button.innerHTML = "Increase SPS + 1 (Level " + upgrade1ButtonStatus + "/15) Cost:" + upgrade1ButtonCost;
     upgrade2Button.hidden = true;
+    upgrade3Button.hidden = true;
 
     localStorage.removeItem("savedScore");
     localStorage.removeItem("savedScoreMultiplier");
@@ -202,5 +238,9 @@ deleteButton.onclick = function deleteProgress() {
     localStorage.removeItem("savedUpgrade2ButtonStatus");
     localStorage.removeItem("savedUpgrade2ButtonCost");
     localStorage.removeItem("savedUpgrade2ButtonMultiplier");
+    
+    localStorage.removeItem("savedUpgrade3ButtonStatus");
+    localStorage.removeItem("savedUpgrade3ButtonCost");
+    localStorage.removeItem("savedUpgrade3ButtonMultiplier");
 }
 
