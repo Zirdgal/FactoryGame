@@ -4,10 +4,25 @@ body{
     margin:0;
     padding:0;
 }
+button {
+    background-color:black;
+    color:white;
+    border-color:white;
+    border-style: solid;
+    margin:5px;
+    padding:10px;
+}
 .display {
+    margin: 5px;
+    padding: 10px;
     background-color: gray;
+    border-color: white;
+    border-style: solid;
     height:220px;
-    width:200px;
+    width:400px;
     float:left;
     font-size: 40px;
+}
+.display-button{
+    margin-top:55px;
 }
