@@ -377,7 +377,7 @@ function upgradeBlockingTimedEvents() {
     } else {
         ascendUpgrade5Button.style.borderColor = "red";
     }
-    if (ascendUpgrade5Status === 4) {
+    if (ascendUpgrade5Status === 5) {
         ascendUpgrade5Button.style.borderColor = "white";
     }
     // COLOUR UPG1
