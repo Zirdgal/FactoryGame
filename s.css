@@ -52,6 +52,7 @@ button {
 
 /* Modal Content/Box */
 .modal-content {
+  background-color: black; /* Fallback colour */
   background-image: url(images/backgrounds/backgroundloop.gif);
   margin: 2.5% auto; /* 15% from the top and centered */
   padding: 20px;
