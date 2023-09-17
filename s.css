@@ -9,6 +9,7 @@ button {
     color:white;
     border-color:white;
     border-style: solid;
+    border-radius:5px;
     margin:5px;
     padding:10px;
 }
@@ -18,11 +19,141 @@ button {
     background-color: gray;
     border-color: white;
     border-style: solid;
-    height:220px;
+    border-radius:5px;
+    height:320px;
     width:400px;
     float:left;
     font-size: 40px;
 }
 .display-button{
-    margin-top:55px;
+  margin-top:80px;
+}
+/*
+    ___                              _           
+   /   |  _____________  ____  _____(_)___  ____  
+  / /| | / ___/ ___/ _ \/ __ \/ ___/ / __ \/ __ \  
+ / ___ |(__  ) /__/  __/ / / (__  ) / /_/ / / / /  
+/_/  |_/____/\___/\___/_/ /_/____/_/\____/_/ /_/  
+                                                                                 
+*/
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-image: url(images/backgrounds/backgroundloop.gif);
+  margin: 2.5% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 3px solid #ffffff;
+  border-radius:5px;
+  width: 85%; /* Could be more or less, depending on screen size */
+  height: 85%;
+}
+
+/* The Close Button */
+.close {
+  color: #ffffff;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: gray;
+  text-decoration: none;
+  cursor: pointer;
+}
+#ascendButtonMenu {
+    float:right;
+    margin:0;
+}
+#ascendUpgrade1 {
+    margin:20% 0% 0% 40%;
+}
+#ascendUpgrade2 {
+  margin:20% 0% 0% 50%;
+}
+#ascendUpgrade3 {
+  margin:10% 0% 0% 50%;
+}
+#ascendUpgrade4 {
+  margin: 20% 0% 0% 30%;
+}
+#ascendUpgrade5 {
+  margin: 30% 0% 0% 30%;
+}
+
+.tooltip {
+  border-radius:100px;
+  position: absolute;
+  z-index: 3;
+}
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 130px;
+  background-color: #000000;
+  border: 3px solid #ffffff;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 4;
+  bottom: 120%;
+  left: -30%;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+hr {
+  color:white;
+  position: absolute;
+}
+#au1-au2 {
+  width:10%;
+  height:0.5%;
+  border:solid;
+  background-color: white;
+  z-index: 2;
+  margin:22.5% 0% 0% 41%;
+}
+#au2-au3 {
+  width:0.25%;
+  height:20%;
+  border:solid;
+  background-color: white;
+  z-index: 2;
+  margin:13% 0% 0% 52%;
+}
+#au1-au4 {
+  width:10%;
+  height:0.5%;
+  border:solid;
+  background-color: white;
+  z-index: 2;
+  margin:22.5% 0% 0% 31%;
+}
+#au4-au5 {
+  width:0.25%;
+  height:20%;
+  border:solid;
+  background-color: white;
+  z-index: 2;
+  margin:22.5% 0% 0% 32%;
 }

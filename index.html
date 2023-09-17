@@ -3,26 +3,48 @@
 <head>
     <meta charse="UTF-8">
     <link rel="stylesheet" href="s.css">
+    <title>ZFG V.0.1.0 - The Ascension Rework</title>
+    <link rel="icon" type="image/x-icon" href="images/logo/favicon.ico">
     <script src="https://kit.fontawesome.com/fe50138296.js" crossorigin="anonymous"></script>
-    <title>ZFG V.0.0.5 - The Nerf Update</title>
 </head>
 <body>
     <div class="display-container">
         <div class="display">
             <p id="displaytext">0</p>
             <p id="scorepersecond">0 SPS</p>
+            <p id="ascensionScore">0 AP</p>
             <div class="display-button">
                 <button id="delbutton">Delete Progress</button>
-                <button id="ascendbutton">Ascend SPS * 10 Cost: 10000</button>
+                <button id="ascendbutton">Ascension Point Cost: 10000 (You will gain: 0 AP)</button>
             </div>
         </div>
     </div>
     <div>
-        <button id="upgrade1">Increase SPS + 1 (Level 0/15) Cost:Free</button>
-        <button id="upgrade2" hidden="true">Increase SPS * 1.5 (Level 0/1) Cost:35</button>
+        <button id="upgrade1">Increase SPS + 1 (Level 0/10) Cost:Free</button>
+        <button id="upgrade2" hidden="true">Increase SPS * 1.1 (Level 0/1) Cost:35</button>
         <button id="upgrade3" hidden="true">Increase SPS ^ 2 (Level 0/1) Cost:100</button>
         <button id="upgrade4" hidden="true">Increase SPS + 10 (Level 0/10) Cost:500</button>
     </div>
+<!-- Trigger/Open The Modal -->
+<button id="ascendButtonMenu">Ascension Menu</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <button id="ascendUpgrade1"class="tooltip"><img src="images/upgrades/ascension1big.png"><span class="tooltiptext" id="ascendUpgrade1ToolTipText">Decrease Ascension Cost (3 AP)</span></button>
+        <hr id="au1-au2">
+        <button id="ascendUpgrade2"class="tooltip"><img src="images/upgrades/ascension2big.png"><span class="tooltiptext" id="ascendUpgrade2ToolTipText">Increase Upgrade2 Multiplier by 0.1 (Level 0/9) (2 AP)</span></button>
+        <hr id="au2-au3">
+        <button id="ascendUpgrade3"class="tooltip"><img src="images/upgrades/ascension3big.png"><span class="tooltiptext" id="ascendUpgrade3ToolTipText">Add Another Level to Upgrade 2 (Level 0/2) (7 AP)</span></button>
+        <hr id="au1-au4">
+        <button id="ascendUpgrade4"class="tooltip"><img src="images/upgrades/ascension4big.png"><span class="tooltiptext" id="ascendUpgrade4ToolTipText">Increase Upgrade1 Level Count (Level 0/5) (1 AP)</span></button>
+        <hr id="au4-au5">
+        <button id="ascendUpgrade5"class="tooltip"><img src="images/upgrades/ascension5big.png"><span class="tooltiptext" id="ascendUpgrade5ToolTipText">Increase Upgrade1 by 0.5 (Level 0/4) (3 AP)</span></button>
+    </div>
+
+</div>
     <script src='index.js'></script>
 </body>
 </html>
