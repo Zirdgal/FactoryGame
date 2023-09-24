@@ -3,7 +3,7 @@
 <head>
     <meta charse="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZFG V.0.1.1-1 - The Ascension Rework</title>
+    <title>ZFG V.0.2.0 - The Small Compatibility Update!</title>
     <link rel="stylesheet" href="s.css">
     <link rel="icon" type="image/x-icon" href="images/logo/favicon.ico">
     <script src="https://kit.fontawesome.com/fe50138296.js" crossorigin="anonymous"></script>
@@ -21,18 +21,12 @@
             </div>
         </div>
     </div>
-    <div class="upgradePos">
-        <button id="upgrade1">Increase SPS + 1 (Level 0/10) Cost:Free</button>
-        <button id="upgrade2" hidden="true">Increase SPS * 1.1 (Level 0/1) Cost:35</button>
-        <button id="upgrade3" hidden="true">Increase SPS ^ 2 (Level 0/1) Cost:100</button>
-        <button id="upgrade4" hidden="true">Increase SPS + 10 (Level 0/10) Cost:500</button>
-    </div>
 <!-- The Modal -->
 <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
-        <button id="ascendUpgrade1"class="tooltip"><img src="images/upgrades/ascension1big.png"><span class="tooltiptext" id="ascendUpgrade1ToolTipText">Decrease Ascension Cost (3 AP)</span></button>
+        <button id="ascendUpgrade1"class="tooltip"><img src="images/upgrades/ascension1big.png"><span class="tooltiptext" id="ascendUpgrade1ToolTipText">Decrease Ascension Cost by 500 (1 AP) (Level 0/2)</span></button>
         <hr id="au1-au2">
         <button id="ascendUpgrade2"class="tooltip"><img src="images/upgrades/ascension2big.png"><span class="tooltiptext" id="ascendUpgrade2ToolTipText">Increase Upgrade2 Multiplier by 0.1 (Level 0/9) (2 AP)</span></button>
         <hr id="au2-au3">
@@ -41,8 +35,18 @@
         <button id="ascendUpgrade4"class="tooltip"><img src="images/upgrades/ascension4big.png"><span class="tooltiptext" id="ascendUpgrade4ToolTipText">Increase Upgrade1 Level Count (Level 0/5) (1 AP)</span></button>
         <hr id="au4-au5">
         <button id="ascendUpgrade5"class="tooltip"><img src="images/upgrades/ascension5big.png"><span class="tooltiptext" id="ascendUpgrade5ToolTipText">Increase Upgrade1 by 0.5 (Level 0/4) (3 AP)</span></button>
+        <hr id="au1-au6">           
+        <button id="ascendUpgrade6"class="tooltip"><img src="images/upgrades/ascension6big.png"><span class="tooltiptext" id="ascendUpgrade6ToolTipText">Increase Upgrade3 by 0.2 (Level 0/2) (4 AP)</span></button>
     </div>
-
+</div>
+<div class="upgradePos">
+    <button id="upgrade1">Increase SPS + 1 (Level 0/10) Cost:Free</button>
+    <hr id="up1-up2">
+    <button id="upgrade2" hidden="true">Increase SPS * 1.1 (Level 0/1) Cost:35</button>
+    <hr id="up2-up3">
+    <button id="upgrade3" hidden="true">Increase SPS ^ 1.1 (Level 0/1) Cost:100</button>
+    <hr id="up1-up4">
+    <button id="upgrade4" hidden="true">Increase SPS + 10 (Level 0/10) Cost:500</button>
 </div>
     <script src='index.js'></script>
 </body>

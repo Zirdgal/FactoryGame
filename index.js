@@ -15,7 +15,7 @@ let ascensionResetScore = 0;
 let ascendButtonCost = 10000;
 
 let ascendUpgrade1Status = 0;
-let ascendUpgrade1Cost = 2;
+let ascendUpgrade1Cost = 1;
 let ascendUpgrade2Status = 0;
 let ascendUpgrade2Cost = 2;
 let ascendUpgrade3Status = 0;
@@ -24,6 +24,8 @@ let ascendUpgrade4Status = 0;
 let ascendUpgrade4Cost = 1;
 let ascendUpgrade5Status = 0;
 let ascendUpgrade5Cost = 3;
+let ascendUpgrade6Status = 0;
+let ascendUpgrade6Cost = 4;
 
 let upgrade1ButtonStatus = 0;
 let upgrade1ButtonCost = 0;
@@ -33,8 +35,10 @@ let upgrade2ButtonStatus = 0;
 let upgrade2ButtonCost = 35;
 let upgrade2Multiplier = 1.1;
 let upgrade2MaxLevel = 1;
+let upgrade3ButtonMaxLevel = 1;
 let upgrade3ButtonStatus = 0;
 let upgrade3ButtonCost = 100;
+let upgrade3Multiplier = 0.1;
 let upgrade4ButtonStatus = 0;
 let upgrade4ButtonCost = 500;
 
@@ -53,17 +57,23 @@ const ascendUpgrade4Button = document.getElementById("ascendUpgrade4");
 const ascendUpgrade4ButtonToolTipText = document.getElementById("ascendUpgrade4ToolTipText");
 const ascendUpgrade5Button = document.getElementById("ascendUpgrade5");
 const ascendUpgrade5ButtonToolTipText = document.getElementById("ascendUpgrade5ToolTipText");
+const ascendUpgrade6Button = document.getElementById("ascendUpgrade6");
+const ascendUpgrade6ButtonToolTipText = document.getElementById("ascendUpgrade6ToolTipText");
+
+const au1au2Line = document.getElementById("au1-au2");
+const au1au4Line = document.getElementById("au1-au4");
+const au1au6Line = document.getElementById("au1-au6");
+const au2au3Line = document.getElementById("au2-au3");
+const au4au5Line = document.getElementById("au4-au5");
 
 const upgrade1Button = document.getElementById("upgrade1");
 const upgrade2Button = document.getElementById("upgrade2");
 const upgrade3Button = document.getElementById("upgrade3");
 const upgrade4Button = document.getElementById("upgrade4");
 
-const au1au2Line = document.getElementById("au1-au2");
-const au1au4Line = document.getElementById("au1-au4");
-const au2au3Line = document.getElementById("au2-au3");
-const au4au5Line = document.getElementById("au4-au5");
-
+const up1up2Line = document.getElementById("up1-up2");
+const up1up4Line = document.getElementById("up1-up4");
+const up2up3Line = document.getElementById("up2-up3");
 
 /*
                                     __        __          __  __                  
@@ -88,23 +98,25 @@ ascendButton.onclick = function ascendUpgrade() {
         upgrade2ButtonStatus = 0;
         upgrade2ButtonCost = 35;
         upgrade3ButtonStatus = 0;
+        upgrade3ButtonCost = 100;
         upgrade4ButtonStatus = 0;
         upgrade4ButtonCost = 500;
 
         upgrade2Button.hidden = true;
         upgrade3Button.hidden = true;
         upgrade4Button.hidden = true;
-        au1au2Line.hidden = true;
-        au1au4Line.hidden = true;
-        au2au3Line.hidden = true;
-        au4au5Line.hidden = true;
+
+        up1up2Line.hidden = true;
+        up1up4Line.hidden = true;
+        up2up3Line.hidden = true;
     }
 }
 ascendUpgrade1Button.onclick = function ascendUpgrade1() {
     if (ascensionScore >= ascendUpgrade1Cost) {
         ascensionScore = ascensionScore - ascendUpgrade1Cost;
-        ascendButtonCost = ascendButtonCost - 1000;
+        ascendButtonCost = ascendButtonCost - 500;
         ascendUpgrade1Status++;
+        ascendUpgrade1Cost++;
     }
 }
 ascendUpgrade2Button.onclick = function ascendUpgrade2() {
@@ -139,6 +151,14 @@ ascendUpgrade5Button.onclick = function ascendUpgrade5() {
         ascendUpgrade5Status++;
     }
 }
+ascendUpgrade6Button.onclick = function ascendUpgrade6() {
+    if (ascensionScore >= ascendUpgrade6Cost) {
+        ascensionScore = ascensionScore - ascendUpgrade6Cost;
+        ascendUpgrade6Cost = ascendUpgrade6Cost + 2;
+        ascendUpgrade6Status++;
+        upgrade3Multiplier = upgrade3Multiplier + 0.2;
+    }
+}
 upgrade1Button.onclick = function upgrade1() {
     if (currentScore >= upgrade1ButtonCost) {
         currentScore = currentScore - upgrade1ButtonCost;
@@ -158,8 +178,9 @@ upgrade2Button.onclick = function upgrade2() {
 upgrade3Button.onclick = function upgrade3() {
     if (currentScore >= upgrade3ButtonCost) {
         currentScore = currentScore - upgrade3ButtonCost;
-        scoreMultiplier = scoreMultiplier * scoreMultiplier;
+        scoreMultiplier = scoreMultiplier * (scoreMultiplier * upgrade3Multiplier);
         upgrade3ButtonStatus++;
+        upgrade3ButtonCost = upgrade3ButtonCost + 900;
     }
 }
 upgrade4Button.onclick = function upgrade4() {
@@ -218,20 +239,27 @@ function upgradeBlockingTimedEvents() {
     ascensionResetScore = currentScore / ascendButtonCost;
 
     //ASCEND 1 UPG
-    if(ascendUpgrade1Status === 1) {
+    if (ascendUpgrade1Status === 2) {
+        ascendUpgrade1ButtonToolTipText.innerHTML = "Decrease Ascension Cost by 500 (Level MAX)"
         ascendUpgrade1Button.disabled = true;
+        ascendUpgrade6Button.hidden = false;
+        au1au6Line.hidden = false;
+    } else {
+        ascendUpgrade1ButtonToolTipText.innerHTML = "Decrease Ascension Cost by 500 (" + ascendUpgrade1Cost + " AP) (Level " + ascendUpgrade1Status + "/2)"
+        ascendUpgrade6Button.hidden = true;
+        au1au6Line.hidden = true;
+        ascendUpgrade1Button.disabled = false;
+    }
+    if(ascendUpgrade1Status >= 1) {
         ascendUpgrade2Button.hidden = false;
         ascendUpgrade4Button.hidden = false;
         au1au2Line.hidden = false;
         au1au4Line.hidden = false;
-        ascendUpgrade1ButtonToolTipText.innerHTML = "Decrease Ascension Cost (Upgraded)"
     } else {
-        ascendUpgrade1Button.disabled = false;
         ascendUpgrade2Button.hidden = true;
         ascendUpgrade4Button.hidden = true;
         au1au2Line.hidden = true;
         au1au4Line.hidden = true;
-        ascendUpgrade1ButtonToolTipText.innerHTML = "Decrease Ascension Cost (3 AP)"
     }
         //ASCEND 2 UPG
     if(ascendUpgrade2Status === 9) {
@@ -280,6 +308,14 @@ function upgradeBlockingTimedEvents() {
         ascendUpgrade5Button.disabled = false;
         ascendUpgrade5ButtonToolTipText.innerHTML = "Increase Upgrade1 by 0.5 (Level " + ascendUpgrade5Status + "/4) (" + ascendUpgrade5Cost + " AP)";
     }
+        //ASCEND 6 UPG
+    if(ascendUpgrade6Status === 2) {
+        ascendUpgrade6Button.disabled = true;
+        ascendUpgrade6ButtonToolTipText.innerHTML = "Increase Upgrade3 by 0.2 (Level MAX)";
+    } else {
+        ascendUpgrade6Button.disabled = false;
+        ascendUpgrade6ButtonToolTipText.innerHTML = "Increase Upgrade3 by 0.2 (Level " + ascendUpgrade6Status + "/2) (" + ascendUpgrade6Cost + " AP)";
+    }
     //UPGRADE 1 BUTTON
     if (upgrade1ButtonStatus === upgrade1ButtonMaxLevel) {
         upgrade1Button.disabled = true;
@@ -290,6 +326,17 @@ function upgradeBlockingTimedEvents() {
     }
     if (upgrade1ButtonStatus >= 3) {
         upgrade2Button.hidden = false;
+        up1up2Line.hidden = false;
+    } else {
+        upgrade2Button.hidden = true;
+        up1up2Line.hidden = true;
+    }
+    if (upgrade1ButtonStatus >= 10) {
+        upgrade4Button.hidden = false;
+        up1up4Line.hidden = false;
+    } else {
+        upgrade4Button.hidden = true;
+        up1up4Line.hidden = true;
     }
 
     //UPGRADE 2 BUTTON
@@ -301,18 +348,21 @@ function upgradeBlockingTimedEvents() {
         upgrade2Button.disabled = false;
         upgrade2Button.innerHTML = "Increase SPS * " + upgrade2Multiplier.toFixed(1) + " (Level " + upgrade2ButtonStatus + "/" + upgrade2MaxLevel + ") Cost:" + upgrade2ButtonCost;
     }
-    if (upgrade2ButtonStatus === 1) {
+    if (upgrade2ButtonStatus >= 1) {
         upgrade3Button.hidden = false;
+        up2up3Line.hidden = false;
+    } else {
+        upgrade3Button.hidden = true;
+        up2up3Line.hidden = true;
     }
 
     //UPGRADE 3 BUTTON
-    if(upgrade3ButtonStatus === 1) {
+    if(upgrade3ButtonStatus === upgrade3ButtonMaxLevel) {
         upgrade3Button.disabled = true;
-        upgrade3Button.innerHTML = "Increase SPS ^ 2 (Level MAX)"
-        upgrade4Button.hidden = false;
+        upgrade3Button.innerHTML = "Increase SPS ^ " + upgrade3Multiplier.toFixed(1) + " (Level MAX)"
     } else {
         upgrade3Button.disabled = false;
-        upgrade3Button.innerHTML = "Increase SPS ^ 2 (Level " + upgrade3ButtonStatus + "/1) Cost: " + upgrade3ButtonCost;
+        upgrade3Button.innerHTML = "Increase SPS ^ " + upgrade3Multiplier.toFixed(1) + " (Level " + upgrade3ButtonStatus + "/" + upgrade3ButtonMaxLevel + ") Cost: " + upgrade3ButtonCost;
     }
     //UPGRADE 4 BUTTON
     if(upgrade4ButtonStatus === 10) {
@@ -341,7 +391,7 @@ function upgradeBlockingTimedEvents() {
     } else {
         ascendUpgrade1Button.style.borderColor = "red";
     }
-    if (ascendUpgrade1Status === 1) {
+    if (ascendUpgrade1Status === 2) {
         ascendUpgrade1Button.style.borderColor = "white";
     }
         // COLOUR ASCEND 2 UPG
@@ -379,6 +429,15 @@ function upgradeBlockingTimedEvents() {
     }
     if (ascendUpgrade5Status === 5) {
         ascendUpgrade5Button.style.borderColor = "white";
+    }
+        // COLOUR ASCEND 6 UPG
+    if (ascensionScore >= ascendUpgrade6Cost) {
+        ascendUpgrade6Button.style.borderColor = "green";
+    } else {
+        ascendUpgrade6Button.style.borderColor = "red";
+    }
+    if (ascendUpgrade6Status === 2) {
+        ascendUpgrade6Button.style.borderColor = "white";
     }
     // COLOUR UPG1
     if (currentScore >= upgrade1ButtonCost) {
@@ -420,7 +479,7 @@ function upgradeBlockingTimedEvents() {
         upgrade3Button.style.backgroundColor = "pink";
         upgrade3Button.style.color = "black";
     }
-    if(upgrade3ButtonStatus === 1) {
+    if(upgrade3ButtonStatus === upgrade3ButtonMaxLevel) {
         upgrade3Button.style.borderColor = "white";
         upgrade3Button.style.backgroundColor = "black";
         upgrade3Button.style.color = "white";
@@ -477,6 +536,9 @@ function timedEvents() {
         //ascend 5 upgrade
     localStorage.savedAscendUpgrade5Cost = ascendUpgrade5Cost;
     localStorage.savedAscendUpgrade5Status = ascendUpgrade5Status;
+        //ascend 6 upgrade
+    localStorage.savedAscendUpgrade6Cost = ascendUpgrade6Cost;
+    localStorage.savedAscendUpgrade6Status = ascendUpgrade6Status;
         // upgrade 1 button
     localStorage.savedUpgrade1ButtonStatus = upgrade1ButtonStatus;
     localStorage.savedUpgrade1ButtonCost = upgrade1ButtonCost;
@@ -490,6 +552,8 @@ function timedEvents() {
         //upgrade 3 button
     localStorage.savedUpgrade3ButtonStatus = upgrade3ButtonStatus;
     localStorage.savedUpgrade3ButtonCost = upgrade3ButtonCost;
+    localStorage.savedUpgradeButton3MaxLevel = upgrade3ButtonMaxLevel;
+    localStorage.setItem("savedUpgrade3Multiplier", upgrade3Multiplier.toString());
         //upgrade 4 button
     localStorage.savedUpgrade4ButtonStatus = upgrade4ButtonStatus;
     localStorage.savedUpgrade4ButtonCost = upgrade4ButtonCost;
@@ -547,6 +611,11 @@ window.addEventListener("DOMContentLoaded", function() {
     if (localStorage.savedAscendUpgrade5Status) {
         ascendUpgrade5Status = parseInt(localStorage.savedAscendUpgrade5Status); }  
 
+    if (localStorage.savedAscendUpgrade6Cost) {
+        ascendUpgrade6Cost = parseInt(localStorage.savedAscendUpgrade6Cost); }
+    if (localStorage.savedAscendUpgrade5Status) {
+        ascendUpgrade6Status = parseInt(localStorage.savedAscendUpgrade6Status); }  
+
     if (localStorage.savedUpgrade1ButtonStatus) {
         upgrade1ButtonStatus = parseInt(localStorage.savedUpgrade1ButtonStatus); }
     if (localStorage.savedUpgrade1ButtonCost) {
@@ -569,6 +638,10 @@ window.addEventListener("DOMContentLoaded", function() {
         upgrade3ButtonStatus = parseInt(localStorage.savedUpgrade3ButtonStatus); }
     if (localStorage.savedUpgrade3ButtonCost) {
         upgrade3ButtonCost = parseInt(localStorage.savedUpgrade3ButtonCost); }
+    if (localStorage.savedUpgrade3ButtonMaxLevel) {
+        upgrade3ButtonMaxLevel = parseInt(localStorage.savedUpgrade3ButtonMaxLevel); }      
+    if (localStorage.savedUpgrade3Multiplier) {
+        upgrade3Multiplier = parseFloat(localStorage.savedUpgrade3Multiplier); }  
 
     if (localStorage.savedUpgrade4ButtonStatus) {
         upgrade4ButtonStatus = parseInt(localStorage.savedUpgrade4ButtonStatus); }
@@ -585,7 +658,7 @@ deleteButton.onclick = function deleteProgress() {
     ascendButtonCost = 10000;
 
     ascendUpgrade1Status = 0;
-    ascendUpgrade1Cost = 2;
+    ascendUpgrade1Cost = 1;
 
     ascendUpgrade2Status = 0;
     ascendUpgrade2Cost = 2;
@@ -598,6 +671,9 @@ deleteButton.onclick = function deleteProgress() {
 
     ascendUpgrade5Status = 0;
     ascendUpgrade5Cost = 3;
+    
+    ascendUpgrade6Status = 0;
+    ascendUpgrade6Cost = 4;
 
     upgrade1ButtonStatus = 0;
     upgrade1ButtonCost = 0;
@@ -610,6 +686,9 @@ deleteButton.onclick = function deleteProgress() {
     upgrade2MaxLevel = 1;
     
     upgrade3ButtonStatus = 0;
+    upgrade3ButtonCost = 100;
+    upgrade3ButtonMaxLevel = 1;
+    upgrade3Multiplier = 0.1;
 
     upgrade4ButtonStatus = 0;
     upgrade4ButtonCost = 500;
@@ -619,20 +698,27 @@ deleteButton.onclick = function deleteProgress() {
     document.getElementById("ascensionScore").innerHTML = ascensionScore;
 
     ascendButton.innerHTML = "Ascension Point Cost: " + ascendButtonCost + " (You will gain: " + ascensionResetScore + " AP)";
+    ascendUpgrade1Button = "Decrease Ascension Cost by 500 (" + ascendUpgrade1Cost + " AP) (Level " + ascendUpgrade1Status + "/2)"
     ascendUpgrade2Button.hidden = true;
     ascendUpgrade3Button.hidden = true;
     ascendUpgrade4Button.hidden = true;
     ascendUpgrade5Button.hidden = true;
+    ascendUpgrade6Button.hidden = true;
+
+    au1au2Line.hidden = true;
+    au1au4Line.hidden = true;
+    au1au6Line.hidden = true;
+    au2au3Line.hidden = true;
+    au4au5Line.hidden = true;
 
     upgrade1Button.innerHTML = "Increase SPS + " + upgrade1ButtonMultiplier + " (Level " + upgrade1ButtonStatus + "/15) Cost:" + upgrade1ButtonCost;
     upgrade2Button.hidden = true;
     upgrade3Button.hidden = true;
     upgrade4Button.hidden = true;
 
-    au1au2Line.hidden = true;
-    au1au4Line.hidden = true;
-    au2au3Line.hidden = true;
-    au4au5Line.hidden = true;
+    up1up2Line.hidden = true;
+    up1up4Line.hidden = true;
+    up2up3Line.hidden = true;
 
     localStorage.removeItem("savedScore");
     localStorage.removeItem("savedScoreMultiplier");
@@ -656,6 +742,9 @@ deleteButton.onclick = function deleteProgress() {
 
     localStorage.removeItem("savedAscendUpgrade5Cost");
     localStorage.removeItem("savedAscendUpgrade5Status");
+    
+    localStorage.removeItem("savedAscendUpgrade6Cost");
+    localStorage.removeItem("savedAscendUpgrade6Status");
 
     localStorage.removeItem("savedUpgrade1ButtonStatus");
     localStorage.removeItem("savedUpgrade1ButtonCost");
@@ -669,6 +758,8 @@ deleteButton.onclick = function deleteProgress() {
     
     localStorage.removeItem("savedUpgrade3ButtonStatus");
     localStorage.removeItem("savedUpgrade3ButtonCost");
+    localStorage.removeItem("savedUpgrade3ButtonMaxLevel");
+    localStorage.removeItem("savedUpgrade3Multiplier");
 
     localStorage.removeItem("savedUpgrade4ButtonStatus");
     localStorage.removeItem("savedUpgrade4ButtonCost");

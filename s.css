@@ -1,4 +1,7 @@
 body{
+    background-image: url(images/backgrounds/backgroundPaper.png);
+    background-size: cover;
+    background-repeat: no-repeat;
     background-color: black;
     color: white;
     margin:0;
@@ -13,10 +16,15 @@ button {
     margin:5px;
     padding:10px;
 }
+hr {
+  color:white;
+  position: absolute;
+  border:solid;
+  background-color: white;
+}
 .display {
     margin: 5px;
     padding: 10px;
-    background-color: gray;
     border-color: white;
     border-style: solid;
     border-radius:5px;
@@ -27,6 +35,60 @@ button {
 }
 .display-button{
   margin-top:80px;
+}
+
+/*
+   __  __                                         __              
+  / / / /    ____    ____ _   _____  ____ _  ____/ /  ___    _____
+ / / / /    / __ \  / __ `/  / ___/ / __ `/ / __  /  / _ \  / ___/
+/ /_/ /    / /_/ / / /_/ /  / /    / /_/ / / /_/ /  /  __/ (__  ) 
+\____/    / .___/  \__, /  /_/     \__,_/  \__,_/   \___/ /____/  
+         /_/      /____/                                          
+*/
+
+.upgradePos {
+  margin-left:25%;
+  height:360px;
+}
+.upgradePos button {
+  position:absolute;
+  z-index: 2;
+}
+.upgradePos hr {
+  z-index: 1;
+}
+#upgrade1 {
+  margin-left:35%;
+}
+#upgrade2 {
+  margin-top:5%;
+  margin-left:20%;
+}
+#upgrade3 {
+  margin-top:10%;
+  margin-left:20%;
+}
+#upgrade4 {
+  margin-top:5%;
+  margin-left:50%;
+}
+#up1-up2 {
+  margin-left:33%;
+  margin-top:-2%;
+  transform:rotate(60deg);
+  height:20%;
+}
+#up2-up3 {
+  margin-left:27%;
+  margin-top:5%;
+  transform:rotate(0deg);
+  height:10%;
+}
+#up1-up4 {
+  margin-left:48%;
+  margin-top:-2%;
+  transform:rotate(-60deg);
+  height:20%;
 }
 /*
     ___                              _           
@@ -40,7 +102,7 @@ button {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 3; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -55,7 +117,6 @@ button {
   background-color: black; /* Fallback colour */
   background-image: url(images/backgrounds/backgroundloop.gif);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
   margin: 2.5% auto; /* 15% from the top and centered */
   padding: 20px;
@@ -94,11 +155,14 @@ button {
 #ascendUpgrade5 {
   margin: 30% 0% 0% 30%;
 }
+#ascendUpgrade6 {
+  margin: 30% 0% 0% 40%;
+}
 
 .tooltip {
   border-radius:100px;
   position: absolute;
-  z-index: 3;
+  z-index: 5;
 }
 /* Tooltip text */
 .tooltip .tooltiptext {
@@ -121,39 +185,133 @@ button {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
-hr {
-  color:white;
-  position: absolute;
-}
 #au1-au2 {
   width:10%;
   height:0.5%;
-  border:solid;
-  background-color: white;
-  z-index: 2;
+  z-index: 4;
   margin:22.5% 0% 0% 41%;
 }
 #au2-au3 {
   width:0.25%;
   height:20%;
-  border:solid;
-  background-color: white;
-  z-index: 2;
+  z-index: 4;
   margin:13% 0% 0% 52%;
 }
 #au1-au4 {
   width:10%;
   height:0.5%;
-  border:solid;
-  background-color: white;
-  z-index: 2;
+  z-index: 4;
   margin:22.5% 0% 0% 31%;
+}
+#au1-au6 {
+  width:10%;
+  height:0.5%;
+  z-index: 4;
+  margin:27% 0% 0% 37.25%;
+  transform: rotate(90deg);
 }
 #au4-au5 {
   width:0.25%;
   height:20%;
-  border:solid;
-  background-color: white;
-  z-index: 2;
+  z-index: 4;
   margin:22.5% 0% 0% 32%;
+}
+/*
+    __  ___           __      _     __                                              _                
+   /  |/  /  ____    / /_    (_)   / /  ___         _   __  ___    _____   _____   (_)  ____    ____ 
+  / /|_/ /  / __ \  / __ \  / /   / /  / _ \       | | / / / _ \  / ___/  / ___/  / /  / __ \  / __ \
+ / /  / /  / /_/ / / /_/ / / /   / /  /  __/       | |/ / /  __/ / /     (__  )  / /  / /_/ / / / / /
+/_/  /_/   \____/ /_.___/ /_/   /_/   \___/        |___/  \___/ /_/     /____/  /_/   \____/ /_/ /_/ 
+                                                                                                                                                                                  
+*/
+@media (max-width: 800px) {
+.display {
+  width:95%;
+}
+#ascendUpgrade1 {
+  margin:10% 0% 0% 40%;
+}
+#ascendUpgrade2 {
+  margin:25% 0% 0% 60%;
+}
+#ascendUpgrade3 {
+  margin:50% 0% 0% 60%;
+}
+#ascendUpgrade4 {
+  margin: 25% 0% 0% 20%;
+}
+#ascendUpgrade5 {
+  margin: 50% 0% 0% 20%;
+}
+#au1-au2 {
+  width:20%;
+  height:0.5%;
+  margin:25% 0% 0% 47%;
+  transform:rotate(40deg);
+}
+#au1-au4 {
+  width:20%;
+  height:0.5%;
+  margin:25% 0% 0% 24%;
+  transform:rotate(-40deg);
+}
+#au1-au6 {
+  width:10%;
+  height:0.5%;
+  margin:27% 0% 0% 41%;
+}
+#au2-au3 {
+  width:0.75%;
+  height:15%;
+  margin:27% 0% 0% 65%;
+}
+#au4-au5 {
+  width:0.75%;
+  height:15%;
+  margin:27% 0% 0% 25%;
+}
+.upgradePos {
+  margin-top:70%;
+  margin-left:0%;
+  width:100%;
+  height:60%;
+  position:absolute;
+}
+.upgradePos button {
+  padding:15px;
+  font-size:15px;
+}
+#upgrade1 {
+  margin-left:35%;
+}
+#upgrade2 {
+  margin-top:10%;
+  margin-left:10%;
+}
+#upgrade3 {
+  margin-top:20%;
+  margin-left:10%;
+}
+#upgrade4 {
+  margin-top:10%;
+  margin-left:60%;
+}
+#up1-up2 {
+  margin-left:35%;
+  margin-top:-2%;
+  transform:rotate(60deg);
+  height:20%;
+}
+#up2-up3 {
+  margin-left:27%;
+  margin-top:15%;
+  transform:rotate(0deg);
+  height:10%;
+}
+#up1-up4 {
+  margin-left:67%;
+  margin-top:-2%;
+  transform:rotate(-60deg);
+  height:20%;
+}
 }
