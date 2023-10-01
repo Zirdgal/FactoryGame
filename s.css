@@ -44,10 +44,11 @@ hr {
     border-radius:5px;
     float:left;
     font-size: 40px;
-    font-family: 'Header';
+    font-family: 'Cooler-Content';
+    font-weight: bold;
 }
 .display-button{
-  margin-top:80px;
+  margin-top:85%;
 }
 .display p {
   position:relative;
