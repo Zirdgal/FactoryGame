@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Header";
+  src: url(fonts/header/RubikMonoOne-Regular.ttf);
+}
+@font-face {
+  font-family: 'Cooler-Content';
+  src: url(fonts/content/Gabarito-VariableFont_wght.ttf);
+}
 body{
     background-image: url(images/backgrounds/backgroundPaper.png);
     background-size: cover;
@@ -15,6 +23,7 @@ button {
     border-radius:5px;
     margin:5px;
     padding:10px;
+    font-family: 'Cooler-Content';
 }
 hr {
   color:white;
@@ -22,19 +31,27 @@ hr {
   border:solid;
   background-color: white;
 }
+.display-container {
+  width:400px;
+  height:360px;
+  position:absolute;
+}
 .display {
     margin: 5px;
     padding: 10px;
     border-color: white;
     border-style: solid;
     border-radius:5px;
-    height:320px;
-    width:400px;
     float:left;
     font-size: 40px;
+    font-family: 'Header';
 }
 .display-button{
   margin-top:80px;
+}
+.display p {
+  position:relative;
+  top:-12.5%;
 }
 
 /*
@@ -48,6 +65,7 @@ hr {
 
 .upgradePos {
   margin-left:25%;
+  padding:1%;
   height:360px;
 }
 .upgradePos button {
@@ -72,23 +90,75 @@ hr {
   margin-top:5%;
   margin-left:50%;
 }
+#upgrade5 {
+  margin-top:10%;
+  margin-left:50%;
+}
 #up1-up2 {
   margin-left:33%;
   margin-top:-2%;
   transform:rotate(60deg);
   height:20%;
 }
-#up2-up3 {
-  margin-left:27%;
-  margin-top:5%;
-  transform:rotate(0deg);
-  height:10%;
-}
 #up1-up4 {
   margin-left:48%;
   margin-top:-2%;
   transform:rotate(-60deg);
-  height:20%;
+  height:20%; 
+}
+#up2-up3 {
+  margin-left:27%;
+  margin-top:5%;
+  height:10%;
+}
+#up4-up5 {
+  margin-left:55%;
+  margin-top:5%;
+  height:10%;
+}
+
+/*
+    ____      ____    
+   /  _/___  / __/___ 
+   / // __ \/ /_/ __ \
+ _/ // / / / __/ /_/ /
+/___/_/ /_/_/  \____/ 
+                      
+*/
+.infoContainer {
+  height:96%;
+  width:97%;
+  margin:1%;
+  display:flex;
+  flex-direction: column;
+}
+.infoHeader {
+  font-family: "Header";
+  font-size:200%
+}
+.infoHeaderSub{
+  padding-left:5%;
+  font-family: "Header";
+  font-size:150%
+}
+.infoText {
+  padding-left:5%;
+  font-family: "Cooler-Content";
+  font-size:150%
+}
+#infoTextEnd {
+  margin-bottom:auto;
+}
+.links {
+  font-family: "Cooler-Content";
+  font-size:150%;
+  text-align: right;
+}
+.links a, a:visited, a:hover {
+  color:blue;
+}
+.links a:active {
+  color:lightblue;
 }
 /*
     ___                              _           
@@ -140,6 +210,9 @@ hr {
   text-decoration: none;
   cursor: pointer;
 }
+#ascendConvert {
+  margin:40% 0% 0% 0%;
+}
 #ascendUpgrade1 {
     margin:20% 0% 0% 40%;
 }
@@ -147,7 +220,7 @@ hr {
   margin:20% 0% 0% 50%;
 }
 #ascendUpgrade3 {
-  margin:10% 0% 0% 50%;
+  margin:30% 0% 0% 50%;
 }
 #ascendUpgrade4 {
   margin: 20% 0% 0% 30%;
@@ -158,14 +231,72 @@ hr {
 #ascendUpgrade6 {
   margin: 30% 0% 0% 40%;
 }
-
+#ascendUpgrade7 {
+  margin: 10% 0% 0% 40%;
+}
+#ascendUpgrade8 {
+  margin: 10% 0% 0% 30%;
+}
+#ascendUpgrade9 {
+  margin: 10% 0% 0% 20%;
+}
 .tooltip {
   border-radius:100px;
   position: absolute;
   z-index: 5;
 }
+.tooltipimg {
+  z-index:5;
+}
+.tooltip hr {
+  z-index: 4;
+}
+#au1-au2 {
+  width:10%;
+  height:0.5%;
+  margin:22.5% 0% 0% 41%;
+}
+#au1-au4 {
+  width:10%;
+  height:0.5%;
+  margin:22.5% 0% 0% 31%;
+}
+#au1-au6 {
+  width:10%;
+  height:0.5%;
+  margin:27% 0% 0% 37.25%;
+  transform: rotate(90deg);
+}
+#au1-au7 {
+  width:10%;
+  height:0.5%;
+  margin:18% 0% 0% 37.25%;
+  transform: rotate(90deg);
+}
+#au2-au3 {
+  width:0.25%;
+  height:20%;
+  margin:23% 0% 0% 52%;
+}
+#au4-au5 {
+  width:0.25%;
+  height:20%;
+  margin:22.5% 0% 0% 32%;
+}
+#au7-au8 {
+  width:10%;
+  height:0.5%;
+  margin:12.25% 0% 0% 31%;
+  transform: rotate(0deg);
+}
+#au8-au9 {
+  width:10%;
+  height:0.5%;
+  margin:12.25% 0% 0% 21%;
+  transform: rotate(0deg);
+}
 /* Tooltip text */
-.tooltip .tooltiptext {
+.tooltiptext {
   visibility: hidden;
   width: 130px;
   background-color: #000000;
@@ -177,44 +308,13 @@ hr {
  
   /* Position the tooltip text */
   position: absolute;
-  z-index: 4;
+  z-index: 6;
   bottom: 120%;
-  left: -30%;
+  left: -45%;
 }
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
-#au1-au2 {
-  width:10%;
-  height:0.5%;
-  z-index: 4;
-  margin:22.5% 0% 0% 41%;
-}
-#au2-au3 {
-  width:0.25%;
-  height:20%;
-  z-index: 4;
-  margin:13% 0% 0% 52%;
-}
-#au1-au4 {
-  width:10%;
-  height:0.5%;
-  z-index: 4;
-  margin:22.5% 0% 0% 31%;
-}
-#au1-au6 {
-  width:10%;
-  height:0.5%;
-  z-index: 4;
-  margin:27% 0% 0% 37.25%;
-  transform: rotate(90deg);
-}
-#au4-au5 {
-  width:0.25%;
-  height:20%;
-  z-index: 4;
-  margin:22.5% 0% 0% 32%;
 }
 /*
     __  ___           __      _     __                                              _                
@@ -227,6 +327,9 @@ hr {
 @media (max-width: 800px) {
 .display {
   width:95%;
+}
+#ascendConvert {
+  margin:130% 0% 0% 0%;
 }
 #ascendUpgrade1 {
   margin:10% 0% 0% 40%;
@@ -243,6 +346,18 @@ hr {
 #ascendUpgrade5 {
   margin: 50% 0% 0% 20%;
 }
+#ascendUpgrade6 {
+  margin:10% 0% 0% 5%;
+}
+#ascendUpgrade7 {
+  margin:30% 0% 0% 40%;
+}
+#ascendUpgrade8 {
+  margin:60% 0% 0% 40%;
+}
+#ascendUpgrade9 {
+  margin:90% 0% 0% 40%;
+}
 #au1-au2 {
   width:20%;
   height:0.5%;
@@ -256,6 +371,12 @@ hr {
   transform:rotate(-40deg);
 }
 #au1-au6 {
+  width:35%;
+  height:0.5%;
+  margin:15% 0% 0% 5%;
+  transform: rotate(0deg);
+}
+#au1-au7 {
   width:10%;
   height:0.5%;
   margin:27% 0% 0% 41%;
@@ -269,6 +390,18 @@ hr {
   width:0.75%;
   height:15%;
   margin:27% 0% 0% 25%;
+}
+#au7-au8 {
+  width:20%;
+  height:0.5%;
+  margin:50% 0% 0% 36%;
+  transform:rotate(90deg);
+}
+#au8-au9 {
+  width:20%;
+  height:0.5%;
+  margin:80% 0% 0% 36%;
+  transform:rotate(90deg);
 }
 .upgradePos {
   margin-top:100%;
@@ -296,10 +429,20 @@ hr {
   margin-top:10%;
   margin-left:60%;
 }
+#upgrade5 {
+  margin-top:25%;
+  margin-left:60%;
+}
 #up1-up2 {
   margin-left:35%;
   margin-top:-2%;
   transform:rotate(60deg);
+  height:20%;
+}
+#up1-up4 {
+  margin-left:67%;
+  margin-top:-2%;
+  transform:rotate(-60deg);
   height:20%;
 }
 #up2-up3 {
@@ -308,11 +451,11 @@ hr {
   transform:rotate(0deg);
   height:10%;
 }
-#up1-up4 {
-  margin-left:67%;
-  margin-top:-2%;
-  transform:rotate(-60deg);
-  height:20%;
+#up4-up5 {
+  margin-left:77%;
+  margin-top:15%;
+  transform:rotate(0deg);
+  height:10%;
 }
 }
 @media (max-width: 500px) {
