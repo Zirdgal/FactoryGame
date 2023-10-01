@@ -654,13 +654,13 @@ function upgradeBlockingTimedEvents() {
     //UPGRADE 5 BUTTON
     if(upgrade5ButtonStatus === 1) {
         upgrade5Button.disabled = true;
-        upgrade5Button.innerHTML = "Increase SPS + 0.01 Per Second (Level MAX)"
+        upgrade5Button.innerHTML = "Increase SPS + 0.1 Per Second (Level MAX)"
         upgrade5Button.style.borderColor = "white";
         upgrade5Button.style.backgroundColor = "black";
         upgrade5Button.style.color = "white";
     } else {
         upgrade5Button.disabled = false;
-        upgrade5Button.innerHTML = "Increase SPS + 0.01 Per Second (Level " + upgrade5ButtonStatus + "/1) Cost:" + upgrade5ButtonCost;
+        upgrade5Button.innerHTML = "Increase SPS + 0.1 Per Second (Level " + upgrade5ButtonStatus + "/1) Cost:" + upgrade5ButtonCost;
     }
 };
 
