@@ -326,6 +326,10 @@ hr {
                                                                                                                                                                                   
 */
 @media (max-width: 800px) {
+body{
+  background-image: url(images/backgrounds/backgroundPaperMobile.png);
+  background-size: 200% auto;
+}
 .display {
   width:95%;
 }

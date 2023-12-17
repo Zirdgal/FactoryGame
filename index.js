@@ -861,6 +861,26 @@ window.addEventListener("DOMContentLoaded", function() {
         upgrade5ButtonCost = parseInt(localStorage.savedUpgrade5ButtonCost);}
     if (localStorage.savedUpgrade5Multiplier) {
         upgrade5Multiplier = parseFloat(localStorage.savedUpgrade5Multiplier);}
+
+    if (localStorage.timeLastPlayed && localStorage.savedScore) {
+        gainedScoreSinceLastPlay = (Math.round((Date.now() - localStorage.timeLastPlayed)/1000)*scoreMultiplier)
+        gainedScoreMultiSinceLastPlay = (Math.round((Date.now() - localStorage.timeLastPlayed)/1000)*upgrade5Multiplier)
+        currentScore = parseInt(localStorage.savedScore) + gainedScoreSinceLastPlay;
+        scoreMultiplier = scoreMultiplier + gainedScoreMultiSinceLastPlay
+    } else {
+        currentScore = 0
+        gainedScoreSinceLastPlay = 0
+    }
+
+    document.getElementById("displaytext").innerHTML = currentScore.toFixed(2) + " Score";
+    scorePerSecond.innerHTML = scoreMultiplier.toFixed(2) + " SPS";
+    ascendButton.innerHTML = "Ascension Point Cost: " + ascendButtonCost + " (You will gain: " + (ascensionResetScore.toFixed(2) * ascendMultiplier.toFixed(2)).toFixed(2) + " AP)";
+    localStorage.setItem("timeLastPlayed", Date.now())
+    if (gainedScoreMultiSinceLastPlay > 0) {
+        alert(`You gained:\n${gainedScoreSinceLastPlay} Score\n${gainedScoreMultiSinceLastPlay} SPS`)
+    } else {
+        alert(`You gained:\n${gainedScoreSinceLastPlay} Score`)
+    }
 });
 
 
