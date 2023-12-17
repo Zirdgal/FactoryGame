@@ -326,6 +326,9 @@ hr {
                                                                                                                                                                                   
 */
 @media (max-width: 800px) {
+body{
+  background-size: auto 900px;
+}
 .display {
   width:95%;
 }
